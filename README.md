@@ -25,6 +25,6 @@ https://github.com/parasbabbar/Babbar-Paras-webdev/tree/master/public/assignment
 
 Link to your assignment: 
 
-https://babbar-paras-webdev.herokuapp.com/assignment/index.html
+https://babbar-paras-webdev.herokuapp.com/assignment/Assignment-2/
 
 https://github.com/parasbabbar/Babbar-Paras-webdev/tree/master/public/project
