@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
-    <title>Widget Youtube</title>
+    <title>Edit Header</title>
     <link href="../css/bootstrap.min.css" rel="stylesheet"/>
     <link href="../css/style.css" rel="stylesheet"/>
 </head>
@@ -17,7 +17,7 @@
                     <span class="glyphicon glyphicon-chevron-left">
                     </span>
                     </a>
-                    <a href="widget-youtube.html" class=" navbar-text pull-right">
+                    <a href="widget-heading.html" class=" navbar-text pull-right">
                         Widget Edit
                     </a>
                 </div>
@@ -34,23 +34,28 @@
         </div>
     </div>
 </nav>
+
 <div class="container-fluid">
         <div class="form-group">
-            <label for="Name">Name</label>
-            <input type="text" class="form-control" id="Name" placeholder="Widget Name">
-            <label for="Text">Text</label>
-            <input type="text" class="form-control" id="Page Title" placeholder="Description">
-            <label for="URL">URL</label>
-            <input type="url" class="form-control" id="URL" placeholder="https://image-url">
-            <label for="width">Width</label>
-            <input type="text" class="form-control" id="width" value="100%">
-            </div>
-            <a class="btn btn-danger  btn-block"
-               href="widget-list.html">Delete</a>
+            <label for="winame" class="no-margin-bottom">Name</label>
+            <input type="text" class="form-control" id="winame" value="Slider Widget">
+
+            <label for="witext" class="no-margin-bottom">Text</label>
+            <input type="text" class="form-control" id="witext" value="So many apps try to do too much, or be too clever, but Slider Widget gets the balance right.">
+
+            <label for="size">Size</label>
+            <select id="size" class="form-control">
+                <option>1 (XX-Large)</option>
+                <option>2 (X-Larger)</option>
+                <option>3 (Large)</option>
+                <option>4 (Medium)</option>
+                <option>5 (Small)</option>
+                <option>6 (X-Small)</option>
+            </select>
         </div>
-</body>
 
-
+        <a class="btn btn-danger  btn-block" href="widget-list.html">Delete</a>
+        </div>
 
 <nav class="navbar navbar-default navbar-fixed-bottom">
     <div class="container-fluid">
