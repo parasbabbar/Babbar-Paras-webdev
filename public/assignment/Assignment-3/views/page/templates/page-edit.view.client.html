@@ -1,23 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
-    <title>Page-Edit</title>
-    <link href="../css/bootstrap.min.css" rel="stylesheet"/>
-    <link href="../css/style.css" rel="stylesheet"/>
-</head>
-<body>
+
 <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container-fluid">
         <div class="row">
             <div class="col-xs-10 col-md-5 col-lg-5">
                 <div class="pull-left">
-                    <a href="page-list.html" class="navbar-link navbar-text pull-left margin-r">
+                    <a href="#!/user/{{model.uid}}/website/{{model.wid}}/page" class="navbar-link navbar-text pull-left margin-r">
                     <span class="glyphicon glyphicon-chevron-left">
                     </span>
                     </a>
-                    <a href="page-edit.html" class=" navbar-text pull-right">
+                    <a href="#!/user/{{model.uid}}/website/{{model.wid}}/page/{{model.pid}}" class=" navbar-text pull-right">
                         Edit Page
                     </a>
                 </div>
@@ -26,7 +17,7 @@
             </div>
             <div class="col-xs-2 col-md-2 col-lg-2">
                 <p class="navbar-text pull-right">
-                    <a href="page-list.html" class="navbar-link">
+                    <a href ng-click="model.updatePage(model.pid,model.page)" class="navbar-link">
                         <span class="glyphicon glyphicon-ok"></span>
                     </a>
                 </p>
@@ -34,17 +25,21 @@
         </div>
     </div>
 </nav>
+
 <div class="container-fluid">
+        <div ng-show="model.message" class="alert alert-danger" role="alert">
+        {{model.message}}
+        </div>
     <form>
         <div class="form-group">
             <label for="Page Name">Name</label>
-            <input type="text" class="form-control" id="Page Name" placeholder="Page Name" value="Blog Post">
+            <input type="text" ng-model="model.page.name" class="form-control" id="Page Name" placeholder="Page Name" value="{{page.name}}">
         </div>
         <div class="form-group">
             <label for="Page Title">Title</label>
-            <input type="text" class="form-control" id="Page Title" placeholder="Page Title">
+            <input type="text" ng-model="model.page.description" class="form-control" id="Page Title" placeholder="Page Title" value="{{page.description}}">
         </div>
-        <a href="page-list.html" class="btn btn-block btn-danger">
+        <a href ng-click="model.deletePage(model.pid)" class="btn btn-block btn-danger">
              Delete
         </a>
     </form>
@@ -58,7 +53,7 @@
             </div>
             <div class="col-xs-2 col-sm-1 col-md-1 col-lg-1">
                 <p class="navbar-text pull-right">
-                    <a href="profile.html" class="navbar-link">
+                    <a href="#!/user/{{model.uid}}" class="navbar-link">
                         <span class="glyphicon glyphicon-user"></span>
                     </a>
                 </p>
@@ -66,5 +61,3 @@
         </div>
     </div>
 </nav>
-</body>
-</html>

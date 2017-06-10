@@ -1,23 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
-    <title>Profile</title>
-    <link href="../css/bootstrap.min.css" rel="stylesheet"/>
-    <link href="../css/style.css" rel="stylesheet"/>
-</head>
-<body>
 <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container-fluid">
         <div class="row">
             <div class="col-xs-10 col-md-5 col-lg-5">
                 <div class="pull-left">
-                    <a href="login.html" class="navbar-link navbar-text pull-left margin-r">
+                    <a href="login.view.client.html" class="navbar-link navbar-text pull-left margin-r">
                     <span class="glyphicon glyphicon-chevron-left">
                     </span>
                     </a>
-                    <a href="profile.html" class=" navbar-text pull-right">
+                    <a href="#!/profile" class=" navbar-text pull-right">
                         Profile
                     </a>
                 </div>
@@ -26,7 +16,7 @@
             </div>
             <div class="col-xs-2 col-md-2 col-lg-2">
                 <p class="navbar-text pull-right">
-                    <a href="profile.html" class="navbar-link">
+                    <a ng-click="model.updateUser(model.user)" class="navbar-link">
                         <span class="glyphicon glyphicon-ok"></span>
                     </a>
                 </p>
@@ -35,10 +25,16 @@
     </div>
 </nav>
         <div class="container-fluid">
+            <div ng-show="model.success" class="alert alert-info">
+                {{model.success}}
+            </div>
+            <div ng-show="model.error" class="alert alert-info">
+                {{model.error}}
+            </div>
             <form>
             <div class="form-group">
                 <label for="username">Username</label>
-                <input type="text" class="form-control" id="username" placeholder="John">
+                <input type="text" ng-model="model.user.username" class="form-control" id="username" placeholder="John">
             </div>
             <div class="form-group">
                 <label for="email">Email address</label>
@@ -46,18 +42,18 @@
             </div>
             <div class="form-group">
                 <label for="first-name">First Name</label>
-                <input type="text" class="form-control" id="first-name" placeholder="John">
+                <input type="text" ng-model="model.user.firstname" class="form-control" id="first-name" placeholder="John">
             </div>
             <div class="form-group">
                 <label for="last-name">Last Name</label>
-                <input type="text" class="form-control" id="last-name" placeholder="Paul">
+                <input type="text" ng-model="model.user.lastname" class="form-control" id="last-name" placeholder="Paul">
             </div>
         </form>
 
         <a class="btn btn-primary btn-block"
-           href="website-list.html">Websites</a>
+           href="#!/user/{{model.user._id}}/website">Websites</a>
         <a class="btn btn-danger  btn-block"
-           href="login.html">Logout</a>
+           href="#!/login">Logout</a>
     </div>
 <nav class="navbar navbar-default navbar-fixed-bottom">
     <div class="container-fluid">
@@ -66,7 +62,7 @@
             </div>
             <div class="col-sm-2 col-md-2">
                 <p class="navbar-text pull-right">
-                    <a href="profile.html" class="navbar-link">
+                    <a href="#/user/{{model.user._id}}/website" class="navbar-link">
                         <span class="glyphicon glyphicon-user"></span>
                     </a>
                 </p>
@@ -74,5 +70,3 @@
         </div>
     </div>
 </nav>
-</body>
-</html>
