@@ -3,23 +3,16 @@
         <div class="row">
             <div class="col-xs-10 col-md-5 col-lg-5">
                 <div class="pull-left">
-                    <a href="widget-list.view.client.html" class="navbar-link navbar-text pull-left margin-r">
+                    <a href="#!/user/{{model.uid}}/website/{{model.wid}}/page/{{model.pid}}/widget" class="navbar-link navbar-text pull-left margin-r">
                     <span class="glyphicon glyphicon-chevron-left">
                     </span>
                     </a>
-                    <a href="widget-chooser.view.client.html" class=" navbar-text pull-right">
+                    <a href="#!/user/{{model.uid}}/website/{{model.wid}}/page/{{model.pid}}/widget" class=" navbar-text pull-right">
                         Choose Widget
                     </a>
                 </div>
             </div>
             <div class="col-md-5 col-lg-5 visible-md visible-lg">
-            </div>
-            <div class="col-xs-2 col-md-2 col-lg-2">
-                <p class="navbar-text pull-right">
-                    <a href="widget-chooser.view.client.html" class="navbar-link">
-                        <span class="glyphicon glyphicon-ok"></span>
-                    </a>
-                </p>
             </div>
         </div>
     </div>
@@ -31,7 +24,7 @@
         </div>
         <div class="col-xs-10 col-sm-10 col-md-5 col-lg-5">
             <p class="pull-left">
-                <a href="widget-heading.view.client.html" class="blue-text"> Header
+                <a href ng-click="model.createWidget(model.createHeader)" class="blue-text"> Header
                 </a>
             </p>
         </div>
@@ -39,7 +32,7 @@
         <div class="row">
             <div class="col-xs-10 col-sm-10 col-md-5 col-lg-5">
                 <p class="pull-left">
-                    <a href="#" class="blue-text"> Label
+                    <a class="blue-text"> Label
                     </a>
                 </p>
             </div>
@@ -47,7 +40,7 @@
             <div class="row">
                 <div class="col-xs-10 col-sm-10 col-md-5 col-lg-5">
                     <p class="pull-left">
-                        <a href="#" class="blue-text"> HTML
+                        <a class="blue-text"> HTML
                         </a>
                     </p>
                 </div>
@@ -55,7 +48,7 @@
         <div class="row">
             <div class="col-xs-10 col-sm-10 col-md-5 col-lg-5">
                 <p class="pull-left">
-                    <a href="#" class="blue-text"> Text Input
+                    <a class="blue-text"> Text Input
                     </a>
                 </p>
             </div>
@@ -63,7 +56,7 @@
         <div class="row">
             <div class="col-xs-10 col-sm-10 col-md-5 col-lg-5">
                 <p class="pull-left">
-                    <a href="#" class="blue-text"> Link
+                    <a class="blue-text"> Link
                     </a>
                 </p>
             </div>
@@ -71,7 +64,7 @@
         <div class="row">
             <div class="col-xs-10 col-sm-10 col-md-5 col-lg-5">
                 <p class="pull-left">
-                    <a href="#" class="blue-text"> button
+                    <a class="blue-text"> button
                     </a>
                 </p>
             </div>
@@ -79,7 +72,7 @@
         <div class="row">
             <div class="col-xs-10 col-sm-10 col-md-5 col-lg-5">
                 <p class="pull-left">
-                    <a href="widget-image.view.client.html" class="blue-text"> Image
+                    <a href ng-click="model.createWidget(model.createImage)" class="blue-text"> Image
                     </a>
                 </p>
             </div>
@@ -88,7 +81,7 @@
         <div class="row">
             <div class="col-xs-10 col-sm-10 col-md-5 col-lg-5">
                 <p class="pull-left">
-                    <a href="widget-youtube.view.client.html" class="blue-text"> Youtube
+                    <a href ng-click="model.createWidget(model.createYoutube)" class="blue-text"> Youtube
                     </a>
                 </p>
             </div>

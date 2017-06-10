@@ -1,5 +1,5 @@
 <nav class="navbar navbar-default navbar-fixed-top">
-    <div class="container">
+    <div class="container-fluid">
         <div class="row">
             <div class="col-xs-10">
                 <div class=" pull-left">
@@ -25,12 +25,10 @@
     </div>
 </nav>
 
-<div class="container">
-    <form>
-        <div class="form-group">
-            <div ng-show="model.message" class="alert alert-danger" role="alert">
-                {{model.message}}
-            </div>
+<div class="container-fluid form-group">
+<div ng-show="model.message" class="alert alert-danger" role="alert">
+    {{model.message}} </div>
+
             <label  for="winame" class="no-margin-bottom">Name</label>
             <input ng-model="model.widget.name" type="text" class="form-control" id="winame" value={{model.widget.name}}>
 
@@ -51,16 +49,9 @@
 
             <a class="btn btn-danger  btn-block"
                ng-click="model.deleteWidget(model.widget)">Delete</a>
-        </div>
-    </form>
-
-    <div ng-show="model.message" class="alert alert-danger" role="alert">
-        {{model.message}}
-    </div>
 </div>
-
 <nav class="navbar navbar-default navbar-fixed-bottom">
-    <div class="container">
+    <div class="container-fluid">
         <div class="row">
             <div class="col-xs-10 col-sm-11 col-md-11 col-lg-11">
             </div>

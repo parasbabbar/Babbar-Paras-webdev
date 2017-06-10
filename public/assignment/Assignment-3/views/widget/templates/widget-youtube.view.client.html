@@ -3,11 +3,11 @@
         <div class="row">
             <div class="col-xs-10 col-md-5 col-lg-5">
                 <div class="pull-left">
-                    <a href="widget-list.view.client.html" class="navbar-link navbar-text pull-left margin-r">
+                    <a href="#/user/{{model.uid}}/website/{{model.wid}}/page/{{model.pid}}/widget" class="navbar-link navbar-text pull-left margin-r">
                     <span class="glyphicon glyphicon-chevron-left">
                     </span>
                     </a>
-                    <a href="widget-youtube.view.client.html" class=" navbar-text pull-right">
+                    <a class=" navbar-text pull-right">
                         Widget Edit
                     </a>
                 </div>
@@ -16,7 +16,7 @@
             </div>
             <div class="col-xs-2 col-md-2 col-lg-2">
                 <p class="navbar-text pull-right">
-                    <a href="widget-list.view.client.html" class="navbar-link">
+                    <a href ng-click="model.updateWidget(model.widget)" class="navbar-link">
                         <span class="glyphicon glyphicon-ok"></span>
                     </a>
                 </p>
