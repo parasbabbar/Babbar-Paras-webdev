@@ -3,11 +3,11 @@
         <div class="row">
             <div class="col-xs-10 col-md-5 col-lg-5">
                 <div class="pull-left">
-                    <a href="login.view.client.html" class="navbar-link navbar-text pull-left margin-r">
+                    <a href="#!/login" class="navbar-link navbar-text pull-left margin-r">
                     <span class="glyphicon glyphicon-chevron-left">
                     </span>
                     </a>
-                    <a href="#!/profile" class=" navbar-text pull-right">
+                    <a class=" navbar-text pull-right">
                         Profile
                     </a>
                 </div>
@@ -16,7 +16,7 @@
             </div>
             <div class="col-xs-2 col-md-2 col-lg-2">
                 <p class="navbar-text pull-right">
-                    <a ng-click="model.updateUser(model.user)" class="navbar-link">
+                    <a href ng-click="model.updateUser(model.user)" class="navbar-link">
                         <span class="glyphicon glyphicon-ok"></span>
                     </a>
                 </p>
@@ -59,7 +59,7 @@
             </div>
             <div class="col-sm-2 col-md-2">
                 <p class="navbar-text pull-right">
-                    <a href="#/user/{{model.user._id}}/website" class="navbar-link">
+                    <a href="#!/user/{{model.user._id}}" class="navbar-link">
                         <span class="glyphicon glyphicon-user"></span>
                     </a>
                 </p>

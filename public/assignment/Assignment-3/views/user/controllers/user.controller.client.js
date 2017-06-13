@@ -48,17 +48,17 @@
         var userId = $routeParams.uid;
         var user = UserService.findUserById(userId);
 
-        if (user != null) {
+        if (user !== null) {
             model.user = user;
         }
 
         function updateUser(newUser) {
             var nUser = UserService.updateUser(userId, newUser);
             if (nUser) {
-                model.success = "User Updated Successfully!!"
+                model.message = "User Updated Successfully!!"
             }
             else {
-                model.error = "Oops! User already exists!!"
+                model.message = "Oops! User already exists!!"
             }
 
         }

@@ -10,6 +10,6 @@ app.use(express.static(__dirname + '/public'));
 
 require ("./test/app.js")(app);
 
-var port = process.env.PORT || 2000;
+var port = process.env.PORT || 5000;
 
 app.listen(port);
