@@ -28,15 +28,17 @@
         };
         return api;
 
-        function createWidget(pageId, widget){
-            var nWidget = widget;
+        function createWidget(pagId, widget){
+                var nWid = {
+                    _id :(new Date()).getTime()+"" ,
+                    pageId : pagId,
+                    name: widget.name,
+                    text: widget.text,
+                    widgetType: widget.widgetType
+                };
+            widgets.push(nWid);
 
-            nWidget._id = (new Date()).getTime()+"";
-            nWidget.pageId = pageId;
-
-            widgets.push(nWidget);
-
-            return nWidget;
+            return nWid;
         }
 
         function findWidgetsByPageId(pageId) {
