@@ -53,9 +53,9 @@
         model.wid = $routeParams.wid;
         model.pid = $routeParams.pid;
         model.wgid = $routeParams.wgid;
-        model.createYoutube = {"_id": "","widgetType": "YOUTUBE", "pageId": model.pid, "width": "" , "url": "" };
-        model.createHeader ={ "_id": "", "widgetType": "HEADING", "pageId": model.pid, "size": "", "text": ""};
-        model.createImage= { "_id": "", "widgetType": "IMAGE", "pageId": model.pid, "width":"", "url": ""};
+        model.createYoutube = {"_id": "","widgetType": "YOUTUBE", "pageId": model.pid, "width": "100%" , "url": "" };
+        model.createHeader ={ "_id": "3455666", "widgetType": "HEADING", "pageId": model.pid, "size": "4", "text": ""};
+        model.createImage= { "_id": "", "widgetType": "IMAGE", "pageId": model.pid, "width":"100%", "url": ""};
         model.createWidget = createWidget;
 
         function createWidget(newWidgetType) {
