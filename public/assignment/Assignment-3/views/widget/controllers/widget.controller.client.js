@@ -36,7 +36,7 @@
 
         function editWidget(w) {
 
-            if (w.widgetType === "YOUTUBE" || w.widgetType === "IMAGE" || w.widgetType === "HEADING") {
+            if (w.widgetType === "YOUTUBE" || w.widgetType === "IMAGE" || w.widgetType === "HEADING" || w.widgetType === "HTML") {
                 $location.url("/user/" + model.uid + "/website/" + model.wid + "/page/" + model.pid + "/widget/" + w._id);
             }
             else {
@@ -56,6 +56,7 @@
         model.createYoutube = {"_id": "","widgetType": "YOUTUBE", "pageId": model.pid, "width": "100%" , "url": "" };
         model.createHeader ={ "_id": "3455666", "widgetType": "HEADING", "pageId": model.pid, "size": "4", "text": ""};
         model.createImage= { "_id": "", "widgetType": "IMAGE", "pageId": model.pid, "width":"100%", "url": ""};
+        model.createhtml= { "_id": "", "widgetType": "HTML", "pageId": model.pid, "text": ""};
         model.createWidget = createWidget;
 
         function createWidget(newWidgetType) {
