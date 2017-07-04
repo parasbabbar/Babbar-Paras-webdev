@@ -1,0 +1,122 @@
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-10 col-md-5 col-lg-5">
+                <div class="pull-left">
+                    <a href="#!/user/{{model.uid}}/website/{{model.wid}}/page/{{model.pid}}/widget" class="navbar-link navbar-text pull-left margin-r">
+                    <span class="glyphicon glyphicon-chevron-left">
+                    </span>
+                    </a>
+                    <a href="#!/user/{{model.uid}}/website/{{model.wid}}/page/{{model.pid}}/widget" class=" navbar-text pull-right">
+                        Choose Widget
+                    </a>
+                </div>
+            </div>
+            <div class="col-md-5 col-lg-5 visible-md visible-lg">
+            </div>
+        </div>
+    </div>
+</nav>
+<div class="container-fluid">
+    <div class="row">
+        <div ng-show="model.message" class="alert alert-danger" role="alert">
+            {{model.message}}
+        </div>
+        <div class="col-xs-10 col-sm-10 col-md-5 col-lg-5">
+            <p class="pull-left">
+                <a href ng-click="model.createWidget(model.createHeader)" class="blue-text"> Header
+                </a>
+            </p>
+        </div>
+    </div>
+        <div class="row">
+            <div class="col-xs-10 col-sm-10 col-md-5 col-lg-5">
+                <p class="pull-left">
+                    <a class="blue-text"> Label
+                    </a>
+                </p>
+            </div>
+        </div>
+            <div class="row">
+                <div class="col-xs-10 col-sm-10 col-md-5 col-lg-5">
+                    <p class="pull-left">
+                        <a href ng-click="model.createWidget(model.createhtml)" class="blue-text"> HTML
+                        </a>
+                    </p>
+                </div>
+            </div>
+        <div class="row">
+            <div class="col-xs-10 col-sm-10 col-md-5 col-lg-5">
+                <p class="pull-left">
+                    <a class="blue-text"> Text Input
+                    </a>
+                </p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-10 col-sm-10 col-md-5 col-lg-5">
+                <p class="pull-left">
+                    <a class="blue-text"> Link
+                    </a>
+                </p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-10 col-sm-10 col-md-5 col-lg-5">
+                <p class="pull-left">
+                    <a class="blue-text"> button
+                    </a>
+                </p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-10 col-sm-10 col-md-5 col-lg-5">
+                <p class="pull-left">
+                    <a href ng-click="model.createWidget(model.createImage)" class="blue-text"> Image
+                    </a>
+                </p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-10 col-sm-10 col-md-5 col-lg-5">
+                <p class="pull-left">
+                    <a href ng-click="model.createWidget(model.createYoutube)" class="blue-text"> Youtube
+                    </a>
+                </p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-10 col-sm-10 col-md-5 col-lg-5">
+                <p class="pull-left">
+                    <a href="#" class="blue-text"> Data Table
+                    </a>
+                </p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-10 col-sm-10 col-md-5 col-lg-5">
+                <p class="pull-left">
+                    <a href="#" class="blue-text"> Repeater
+                    </a>
+                </p>
+            </div>
+        </div>
+</div>
+
+
+<nav class="navbar navbar-default navbar-fixed-bottom">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-10 col-sm-11 col-md-11 col-lg-11">
+            </div>
+            <div class="col-xs-2 col-sm-1 col-md-1 col-lg-1">
+                <p class="navbar-text pull-right">
+                    <a href="../../user/templates/profile.view.client.html" class="navbar-link">
+                        <span class="glyphicon glyphicon-user"></span>
+                    </a>
+                </p>
+            </div>
+        </div>
+    </div>
+</nav>
