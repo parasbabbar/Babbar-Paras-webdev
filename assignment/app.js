@@ -1,11 +1,12 @@
 var mongoose = require('mongoose');
-var connectionString = 'mongodb://localhost/webdev';
-if(process.env.MLAB_WEBDEV_NEU_UNAME) { // check if running remotely
-    var username = process.env.MLAB_WEBDEV_NEU_UNAME; // get from environment
-    var password = process.env.MLAB_WEBDEV_NEU_PASS;
+var connectionString = 'mongodb://127.0.0.1:27017/webdev'; // for local
+if(process.env.MLAB_USERNAME_WEBDEV) { // check if running remotely
+    var username = process.env.MLAB_USERNAME_WEBDEV; // get from environment
+    var password = process.env.MLAB_PASSWORD_WEBDEV;
     connectionString = 'mongodb://' + username + ':' + password;
-    connectionString += '@ds139761.mlab.com:39761/heroku_v7g71n9h'; // user yours
+    connectionString += '@ds025459.mlab.com:25459/heroku_rw478k23'; // user yours
 }
+
 
 mongoose.connect(connectionString);
 mongoose.Promise = require('q').Promise;
