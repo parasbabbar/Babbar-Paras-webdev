@@ -54,7 +54,7 @@
         <a class="btn btn-block btn-primary" href="#!/user/{{model.uid}}/website/{{model.wid}}/page/{{model.pid}}/widget/{{model.wgid}}/flickr">Flickr Image Search</a>
 
 
-        <button type="submit" href="#!/user/{{model.uid}}/website/{{model.wid}}/page/{{model.pid}}/widget/{{model.wgid}}"  class="btn btn-block btn-primary">Upload Image</button>
+        <button type="submit" ng-click="model.updateWidget(model.widget)" class="btn btn-block btn-primary">Upload Image</button>
             <a class="btn btn-danger  btn-block"
              ng-click="model.deleteWidget(model.widget)">Delete</a>
         </form>
