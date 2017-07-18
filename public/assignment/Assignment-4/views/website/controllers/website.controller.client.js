@@ -113,14 +113,8 @@
         function deleteWebsite(webId) {
             WebsiteService
                 .deleteWebsite(webId)
-                .then(function (webId) {
-                    if (webId === null) {
-                        model.message = "Something went wrong..Please try again..!"
-
-                    }
-                    else {
-                        $location.url("/user/" + $routeParams.uid + "/website");
-                    }
+                .then(function () {
+                    $location.url("/user/" + model.uid + "/website");
                 });
         }
 }})();

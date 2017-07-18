@@ -1,4 +1,4 @@
-<div ng-switch="model.widget.widgetType">
+<div ng-switch="model.widget.type">
     <div ng-show="model.message" class="alert alert-danger" role="alert">
         {{model.message}}
     </div>
@@ -16,6 +16,9 @@
     </div>
     <div ng-switch-when="HTML">
         <ng-include src="'/assignment/Assignment-4/views/widget/templates/widget-html.view.client.html'">
+    </div>
+    <div ng-switch-when="TEXT">
+        <ng-include src="'/assignment/Assignment-4/views/widget/templates/widget-text.view.client.html'">
     </div>
 </div>
 

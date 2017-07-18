@@ -1,0 +1,71 @@
+<div>
+
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-xs-10">
+                    <div class=" pull-left">
+                        <div>
+                            <a href="#!/user/{{model.uid}}/website/{{model.wid}}/page/{{model.pid}}/widget" class="navbar-link navbar-text pull-left margin-r">
+                                <span class="glyphicon glyphicon-chevron-left"/>
+                            </a>
+                            <p class="navbar-text pull-right">
+                                Widget Edit
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xs-2">
+                    <p class="navbar-text pull-right">
+                        <a href ng-click="model.updateWidget(model.widget)" class="navbar-link">
+                            <span class="glyphicon glyphicon-ok"/>
+                        </a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid">
+        <form>
+            <div class="form-group">
+
+                <label  for="witext" class="no-margin-bottom">Text</label>
+                <input ng-model="model.widget.text" type="text" class="form-control" id="witext" >
+
+                <label  for="wiRows" class="no-margin-bottom">Rows</label>
+                <input ng-model="model.widget.rows" type="number" class="form-control" id="wiRows">
+
+                <label  for="wiPlaceholder" class="no-margin-bottom">Placeholder</label>
+                <input ng-model="model.widget.placeholder" type="text" class="form-control" id="wiPlaceholder" >
+
+                <label for="wiFormatted">Formatted</label>
+                <input id="wiFormatted" ng-model="model.widget.formatted" type="checkbox"/>
+
+                <a class="btn btn-danger  btn-block"
+                   href ng-click="model.deleteWidget(model.widget)">Delete</a>
+            </div>
+        </form>
+        <div ng-show="model.messgae" class="alert alert-danger" role="alert">
+            {{model.messgae}}
+        </div>
+    </div>
+
+    <nav class="navbar navbar-default navbar-fixed-bottom">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-xs-10 col-sm-11 col-md-11 col-lg-11">
+                </div>
+                <div class="col-xs-2 col-sm-1 col-md-1 col-lg-1">
+                    <p class="navbar-text pull-right">
+                        <a href="#!/user/{{model.uid}}" class="navbar-link">
+                            <span class="glyphicon glyphicon-user"/>
+                        </a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+</div>

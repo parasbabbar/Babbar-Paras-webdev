@@ -7,82 +7,80 @@
         .controller("FlickrImageSearchController",FlickrImageSearchController);
 
     function WidgetListController($sce, $routeParams, WidgetService, $location) {
-
         var model = this;
         model.uid = $routeParams.uid;
-        model.pid = $routeParams.pid;
         model.wid = $routeParams.wid;
-        model.trustThisContent = trustThisContent;
-        model.getYoutubeUrl = getYoutubeUrl;
+        model.pid = $routeParams.pid;
+        model.getSafeHtml = getSafeHtml;
+        model.checkSafeURL = checkSafeURL;
         model.editWidget = editWidget;
 
         function init() {
             WidgetService
                 .findWidgetsByPageId(model.pid)
-                .then(renderwidgets);
+                .then(function (widget) {
+                if (widget != '0') {
+                    model.widgets = widget;
+                }
+            });
 
         }
         init();
 
-        function renderwidgets(widgets) {
-            model.widgets = widgets;
 
+        function getSafeHtml(text) {
+            return $sce.trustAsHtml(text);
         }
 
-        function trustThisContent(html) {
-            return $sce.trustAsHtml(html);
-        }
-
-        function getYoutubeUrl(widgetURL) {
+        function checkSafeURL(widgetURL) {
             var parts = widgetURL.split('/');
             var id = parts[parts.length - 1];
-            url = "https://www.youtube.com/embed/" + id;
-            console.log(url);
+            url = "https://www.youtube.com/embed/"+id;
 
             return $sce.trustAsResourceUrl(url);
         }
 
-        function editWidget(w) {
+        function editWidget(w){
+            // console.log(w);
 
-            if (w.widgetType === "YOUTUBE" || w.widgetType === "IMAGE" || w.widgetType === "HEADING" || w.widgetType === "HTML") {
+            if (w.type === "YOUTUBE" || w.type === "IMAGE" || w.type === "HTML"|| w.type === "HEADING" || w.type === "TEXT"){
                 $location.url("/user/" + model.uid + "/website/" + model.wid + "/page/" + model.pid + "/widget/" + w._id);
             }
-            else {
+            else{
                 $location.url("/user/" + model.uid + "/website/" + model.wid + "/page/" + model.pid + "/widget");
             }
 
         }
 
-        
     }
+
     function NewWidgetController($location ,$routeParams, WidgetService){
         var model = this;
+        model.createWidget = createWidget;
+
+
         model.uid = $routeParams.uid;
         model.wid = $routeParams.wid;
         model.pid = $routeParams.pid;
         model.wgid = $routeParams.wgid;
-        model.createYoutube = {"_id": "","widgetType": "YOUTUBE", "pageId": model.pid, "width": "100%" , "url": "" };
-        model.createHeader ={ "_id": "", "widgetType": "HEADING", "pageId": model.pid, "size": "", "text": ""};
-        model.createImage= { "_id": "", "widgetType": "IMAGE", "pageId": model.pid, "width":"100%", "url": ""};
-        model.createhtml= { "_id": "", "widgetType": "HTML", "pageId": model.pid, "text": ""};
-        model.createWidget = createWidget;
 
-        function createWidget(newWidgetType) {
+        model.createYoutube = {name: "Youtube Widget", type: "YOUTUBE", width: "100%", url: "https://youtu.be/AM2Ivdi9c4E"};
+        model.createHeader = {name: "Header Widget", type: "HEADING", size: 3, text: "Lorem ipsum"};
+        model.createImage = {name: "Image Widget", type: "IMAGE", width: "100%", url: "http://lorempixel.com/400/200/"};
+        model.createHTML = {name: "HTML Widget", type: "HTML", text: "New HTML Widget"};
+        model.createText = {name: "Text Widget", type: "TEXT", formatted: false, rows: 1, placeholder: "", text: "new"};
 
+
+        function createWidget(widget) {
+            console.log(widget);
             WidgetService
-                .createWidget(model.pid, newWidgetType)
-                .then(function(newCreateWidget){
-
-            if (newCreateWidget) {
-                console.log(newCreateWidget);
-                $location.url("/user/" + model.uid + "/website/" + model.wid + "/page/" + model.pid + "/widget/" + newCreateWidget._id);
-            }
-            else {
-                model.message = "OOPS!! Something went wrong.. Please try again..";
-            }
-
-        });
-    }}
+                .createWidget(model.pid, widget)
+                .then(function (widget) {
+                    console.log(widget);
+                    $location.url("/user/" + model.uid + "/website/" + model.wid + "/page/" + model.pid + "/widget/" + widget._id);
+            });
+        }
+    }
 
     function EditWidgetController($location, $routeParams, WidgetService){
         var model = this;
@@ -125,18 +123,18 @@
             WidgetService
                 .deleteWidget(widget._id)
                 .then(function(res){
-            if (res) {
-                $location.url("/user/" + model.uid + "/website/" + model.wid + "/page/" + model.pid + "/widget");
-            } else {
-                model.message = "OOPS!! Something went wrong.. Please try again..";
-            }
-        });
+                    if (res) {
+                        $location.url("/user/" + model.uid + "/website/" + model.wid + "/page/" + model.pid + "/widget");
+                    } else {
+                        model.message = "OOPS!! Something went wrong.. Please try again..";
+                    }
+                });
 
-        // function getWidgetUrlForType(Type) {
-        //     return '/assignment/Assignment-4/views/widget/templates/widget-'+Type.toLowerCase()+'.view.client.html';
-        // }
+            // function getWidgetUrlForType(Type) {
+            //     return '/assignment/Assignment-4/views/widget/templates/widget-'+Type.toLowerCase()+'.view.client.html';
+            // }
 
-    }}
+        }}
 
     function FlickrImageSearchController($location ,$routeParams, FlickrService, WidgetService){
         var model = this;

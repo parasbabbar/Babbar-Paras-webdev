@@ -55,6 +55,7 @@
                             username: username,
                             password: password
                         };
+
                         UserService
                             .createUser(user)
                             .then(function (user) {
@@ -65,7 +66,8 @@
                 });
 
         }
-            }
+    }
+
 
 
 
