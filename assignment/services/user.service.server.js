@@ -1,7 +1,6 @@
 var app = require('../../express');
 var userModel = require('../model/user/user.model.server');
 
-
 // var users = [
     //     {_id: "123", username: "alice",    password: "alice",    firstName: "Alice",  lastName: "Wonder"  },
     //     {_id: "234", username: "bob",      password: "bob",      firstName: "Bob",    lastName: "Marley"  },
@@ -20,7 +19,7 @@ var userModel = require('../model/user/user.model.server');
             .deleteUser(uid)
             .then(
                 function(status) {
-                    res.send(200)
+                    res.sendStatus(200)
                 },
                 function(error){
                     res.sendStatus(400).send(error);
