@@ -9,7 +9,7 @@ if(process.env.MLAB_USERNAME_WEBDEV) { // check if running remotely
 
 
 mongoose.connect(connectionString);
-mongoose.Promise = require('q').Promise;
+
 
 require("./services/user.service.server");
 require("./services/website.service.server");
