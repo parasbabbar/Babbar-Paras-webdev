@@ -37,11 +37,11 @@ var FacebookStrategy = require('passport-facebook').Strategy;
     app.post('/api/register',register);
     app.get ('/auth/facebook', passport.authenticate('facebook', { scope : 'email' }));
     app.get('/auth/facebook/callback', passport.authenticate('facebook',
-    {successRedirect: '/#!/profile', failureRedirect: '/assignment/Assignment-4/#!/login'}));
+    {successRedirect: '/assignment/Assignment-4/#!/profile', failureRedirect: '/assignment/Assignment-4/#!/login'}));
 
 
 
-function localStrategy(username, password, done) {
+function localStrategy(username, password, done) {33
     console.log(username);
     userModel
         .findUserByUsername(username)
@@ -59,35 +59,76 @@ function localStrategy(username, password, done) {
             done(error, false);
         });
 }
-function facebookLogin(token, refreshToken, profile, done){
+
+// function facebookLogin(accessToken, refreshToken, profile, cb) {
+//     User.findOrCreate({ facebookId: profile.id }, function (err, user) {
+//         return cb(err, user);
+//     });
+// }
+// function facebookLogin(token, refreshToken, profile, done){
+//     userModel
+//         .findFacebookUser(profile.id)
+//         .then(
+//             function(fbuser){
+//                 if(fbuser) {
+//                     done(null, user);
+//                 }
+//                 else {
+//                     fbuser = {
+//                         username: profile.displayName.replace(/ /g,''),
+//                         facebook: {
+//                             token: token,
+//                             id: profile.id,
+//                             displayName: profile.displayName,
+//                         }
+//                     };
+//                         userModel
+//                             .createUser(fbuser)
+//                             .then(
+//                              function(user){
+//                                 done(null,user);
+//                             }
+//                         );
+//                 }
+//             });
+// }
+
+function facebookLogin(token, refreshToken, profile, done) {
     userModel
         .findFacebookUser(profile.id)
         .then(
-            function(fbuser){
-                if(fbuser) {
-                    return done(null, fbuser);
-                }
-                else {
-                    fbuser = {
-                        username: profile.displayName.replace(/ /g,''),
+            function(user) {
+                console.log(profile);
+                if(user) {
+                    return done(null, user);
+                } else {
+                    // var displayName = profile.displayName.split(" ");
+                    var newFacebookUser = {
+                        username:  displayName[0],
+                        firstName: displayName[0],
+                        lastName:  displayName[0],
+                        password:  "abc123",
                         facebook: {
-                            token: token,
-                            id: profile.id,
-                            displayName: profile.displayName,
+                            id:    profile.id,
+                            token: token
                         }
                     };
-                    return userModel
-                        .createUser(fbuser)
-                        .then(
-                            function(user){
-                                done(null,user);
-                            }
-                        );
+                    return userModel.createUser(newFacebookUser);
                 }
+            },
+            function(err) {
+                if (err) { return done(err); }
             }
         )
+        .then(
+            function(user){
+                return done(null, user);
+            },
+            function(err){
+                if (err) { return done(err); }
+            }
+        );
 }
-
 
 function login(req, res) {
         var user= req.user;
