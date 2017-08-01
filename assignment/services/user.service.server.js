@@ -15,9 +15,9 @@ var FacebookStrategy = require('passport-facebook').Strategy;
     // ];
 
     var facebookConfig = {
-    clientID     : '157561614795157',
-    clientSecret : 'c4a4ed4f1af44fc1eae9c2c288cf5fd6',
-    callbackURL  : '/auth/facebook/callback',
+        clientID     : process.env.clientID,
+        clientSecret : process.env.clientSecret,
+        callbackURL  : process.env.callbackURL ,
         profileFields: ['id','emails', 'first_name', 'last_name', 'displayName']
     };
 
