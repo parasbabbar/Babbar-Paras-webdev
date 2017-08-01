@@ -10,9 +10,57 @@
             "findUserByUsername" : findUserByUsername,
             "findUserById" : findUserById,
             "updateUser" : updateUser,
-            "deleteUser" : deleteUser
+            "deleteUser" : deleteUser,
+            "login": login,
+            "logout": logout,
+            "loggedIn": loggedIn,
+            "register": register
         };
         return api;
+
+        function loggedIn(){
+            return $http.get("/api/loggedin")
+                .then(function(response) {
+                    console.log(response);
+                    return response.data;
+                });
+
+        }
+
+        function register(nUser){
+            return $http.post("/api/register", nUser)
+                .then(function(response) {
+                    console.log(response);
+                    return response.data;
+                });
+
+        }
+
+
+        function logout(){
+            return $http.post("/api/logout")
+                .then(function(response) {
+                    console.log(response);
+                    return response.data;
+                });
+
+        }
+
+        function login(username,password){
+            // console.log("mafx");
+            var user = {
+                username: username,
+                password: password
+            };
+
+            var url = "/api/login";
+            return $http.post(url, user)
+                .then(function(response) {
+                    console.log(response);
+                    return response.data;
+                });
+
+        }
 
         function findUserByCredentials (username, password) {
             var url = "/api/user?username="+username+"&password="+password;

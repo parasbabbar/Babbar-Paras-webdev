@@ -10,6 +10,7 @@ var userModel = mongoose.model('UserModel', userSchema);
     userModel.deleteUser = deleteUser;
     userModel.addWebsite = addWebsite;
     userModel.deleteWebsite = deleteWebsite;
+    userModel.findFacebookUser = findFacebookUser;
 
 module.exports = userModel;
 
@@ -21,13 +22,12 @@ module.exports = userModel;
         return userModel.find({username: username, password: password});
     }
 
-    function findUserByUsername(username) {
-        return userModel.find({
-            username: username
-        });
-    }
+function findUserByUsername(username) {
+    return userModel.findOne({username: username});
+}
 
-    function createUser(user){
+
+function createUser(user){
         return userModel.create(user);
     }
 
@@ -59,5 +59,9 @@ module.exports = userModel;
             user.websites.splice(index, 1);
             return user.save();
         });
+}
+
+function findFacebookUser(id){
+    return userModel.findOne({"facebook.id": id});
 }
 

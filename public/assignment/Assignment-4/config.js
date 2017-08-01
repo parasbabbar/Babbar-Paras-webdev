@@ -19,20 +19,40 @@
                 controller: 'registerController',
                 controllerAs: 'model'
             })
+
+            .when('/profile', {
+                templateUrl: '/assignment/Assignment-4/views/user/templates/profile.view.client.html',
+                controller: 'profileController',
+                controllerAs: 'model',
+                resolve: {
+                    currentUser: checkLoggedIn
+                }
+            })
+
+
             .when('/user/:uid', {
                 templateUrl: '/assignment/Assignment-4/views/user/templates/profile.view.client.html',
                 controller: 'profileController',
-                controllerAs: 'model'
+                controllerAs: 'model',
+                resolve: {
+                    currentUser: checkLoggedIn
+                }
             })
             .when("/user/:uid/website", {
                 templateUrl: '/assignment/Assignment-4/views/website/templates/website-list.view.client.html',
                 controller: "WebsiteListController",
-                controllerAs: "model"
+                controllerAs: "model",
+                resolve: {
+                    currentUser: checkLoggedIn
+                }
             })
             .when("/user/:uid/website/new", {
                 templateUrl: '/assignment/Assignment-4/views/website/templates/website-new.view.client.html',
                 controller: "NewWebsiteController",
-                controllerAs: "model"
+                controllerAs: "model",
+                resolve: {
+                    currentUser: checkLoggedIn
+                }
             })
             .when("/user/:uid/website/:wid", {
                 templateUrl: '/assignment/Assignment-4/views/website/templates/website-edit.view.client.html',
@@ -80,4 +100,25 @@
                 redirectTo: "/home"
             });
     }
+
+
+    function checkLoggedIn(UserService, $q, $location) {
+        var deferred = $q.defer();
+
+        UserService
+            .loggedIn()
+            .then(function (user) {
+                // console.log("gvsdgsg");
+                if(user === '0') {
+                    deferred.reject();
+                    $location.url('/login');
+
+                } else {
+                    deferred.resolve(user);
+                }
+            });
+
+        return deferred.promise;
+    }
+
 })();

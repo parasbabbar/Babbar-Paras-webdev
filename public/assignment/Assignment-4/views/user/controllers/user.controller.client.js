@@ -6,24 +6,39 @@
         .controller('registerController', registerController)
         .controller('profileController', profileController);
 
+
     function loginController($location, UserService) {
+
         var model = this;
-        model.login = login;   //event handlers
+        model.login = login;
 
         function login(username, password) {
-            // var user = UserService.findUserByCredentials(username, password);
-            UserService
-                .findUserByCredentials(username, password)
-                .then(function (user) {
-                    if (user === '0') {
-                        model.message = "Sorry, " + username + " not found. Please try again!!";
-                    }
-                    else {
-                        $location.url("/user/" + user._id);
-                    }
-                });
+            // console.log("in controller login"+username);
+            if (username && password){
+                // console.log(password);
+                UserService
+                    .login(username, password)
+                    .then(function (response) {
+                            var user = response.username;
+                            console.log(user);
+                            // console.log("near redirect"+user);
+                            // console.log(user);
+                            if (user)
+                            //$location.url("/user/" + user._id);
+                                $location.url("/profile");
+                            else
+                                model.message = "User not found";
+                        },
+                        function (err) {
+                            model.message = "User not found";
+                        });
+            }
+            else{
+                model.message="Oops !! Please enter username and password!!";
+            }
 
         }
+
     }
 
     function registerController($location, UserService) {
@@ -57,9 +72,10 @@
                         };
 
                         UserService
-                            .createUser(user)
+                            .register(user)
+                            // .createUser(user)
                             .then(function (user) {
-                                $location.url('/user/' + user._id);
+                                $location.url('/profile');
 
                             });
                     }
@@ -72,28 +88,35 @@
 
 
 
-    function profileController(UserService, $routeParams,$location) {
+    function profileController(UserService, $routeParams,$location,currentUser) {
 
         var model = this;
         model.updateUser = updateUser;
         model.deleteUser = deleteUser;
+        model.logout = logout;
+        var Id = currentUser._id;
+        console.log(Id);
 
-        var userId = $routeParams.uid;
+        // var userId = $routeParams.uid;
         // var user = UserService.findUserById(userId);
         //
         // if (user != null) {
         //     model.user = user;
         // }
 
-        UserService
-            .findUserById(userId)
-            .then(renderUser, Usermessage);
+        function init() {
 
-            function renderUser (User) {
+            UserService
+                .findUserById(Id)
+                .then(renderUser, Usermessage);
+        }
+        init();
+
+        function renderUser (User) {
             model.user = User;
         }
         function Usermessage (message){
-                model.message = "User Not Found";
+            model.message = "User Not Found";
 
         }
 
@@ -101,26 +124,36 @@
             UserService
                 .updateUser(newUser._id, newUser)
                 .then(function(newUser){
-                if (newUser) {
-                model.message = "User Updated Successfully!!"
-                }
-                else {
-                model.message = "Oops! User already exists!!"
-                }
+                    if (newUser) {
+                        model.message = "User Updated Successfully!!"
+                    }
+                    else {
+                        model.message = "Oops! User already exists!!"
+                    }
 
-            });
-    }
+                });
+        }
         function deleteUser(dUser) {
             UserService
-                .deleteUser(userId)
+                .deleteUser(Id)
                 .then(function(){
                     $location.url('/');
                 });
 
         }
 
+        function logout(){
+            UserService
+                .logout()
+                .then(
+                    function(response){
+                        $location.url("/login");
+                    },
+                    function(){
+                        $location.url("/login");
+                    }
+                )
+        }
 
     }
 })();
-
-
