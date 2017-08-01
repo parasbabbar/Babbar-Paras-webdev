@@ -15,9 +15,10 @@ var FacebookStrategy = require('passport-facebook').Strategy;
     // ];
 
     var facebookConfig = {
-    clientID     : '477768169245791',
-    clientSecret : '8f3f0ba0406aaed7b74f0f15f2677888',
-    callbackURL  : '/auth/facebook/callback'
+    clientID     : '157561614795157',
+    clientSecret : 'c4a4ed4f1af44fc1eae9c2c288cf5fd6',
+    callbackURL  : '/auth/facebook/callback',
+        profileFields : ['id', 'emails']
     };
 
     passport.use('facebook', new FacebookStrategy(facebookConfig, facebookLogin));
@@ -36,9 +37,7 @@ var FacebookStrategy = require('passport-facebook').Strategy;
     app.post('/api/register',register);
     app.get ('/auth/facebook', passport.authenticate('facebook', { scope : 'email' }));
     app.get('/auth/facebook/callback', passport.authenticate('facebook',
-    {successRedirect: '/assignment/#/user', failureRedirect: '/assignment/#/login'}));
-
-
+    {successRedirect: '/#!/profile', failureRedirect: '/assignment/Assignment-4/#!/login'}));
 
 
 
