@@ -18,7 +18,7 @@ var FacebookStrategy = require('passport-facebook').Strategy;
     clientID     : '157561614795157',
     clientSecret : 'c4a4ed4f1af44fc1eae9c2c288cf5fd6',
     callbackURL  : '/auth/facebook/callback',
-        profileFields : ['id', 'emails']
+        profileFields: ['id','emails', 'first_name', 'last_name', 'displayName']
     };
 
     passport.use('facebook', new FacebookStrategy(facebookConfig, facebookLogin));
@@ -41,7 +41,7 @@ var FacebookStrategy = require('passport-facebook').Strategy;
 
 
 
-function localStrategy(username, password, done) {33
+function localStrategy(username, password, done) {
     console.log(username);
     userModel
         .findUserByUsername(username)
@@ -101,13 +101,16 @@ function facebookLogin(token, refreshToken, profile, done) {
                 console.log(profile);
                 if(user) {
                     return done(null, user);
-                } else {
-                    // var displayName = profile.displayName.split(" ");
+                }
+                else {
+                    var passwd= bcrypt.hashSync("abc123");
+                    var displayName = profile.displayName.split(" ");
                     var newFacebookUser = {
                         username:  displayName[0],
                         firstName: displayName[0],
-                        lastName:  displayName[0],
-                        password:  "abc123",
+                        lastName:  displayName[1],
+                        password:  passwd,
+                        email: profile.emails[0].value,
                         facebook: {
                             id:    profile.id,
                             token: token
