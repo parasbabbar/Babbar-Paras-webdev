@@ -11,7 +11,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 
 app.use(cookieParser());
-app.use(session({ secret: "dnknekfnqeknqkfqenfkf",
+app.use(session({ secret: process.env.secret,
     resave: true,
     saveUninitialized: true
 }));
