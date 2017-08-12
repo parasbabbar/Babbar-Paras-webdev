@@ -14,15 +14,15 @@ var FacebookStrategy = require('passport-facebook').Strategy;
     //     {_id: "456", username: "jannunzi", password: "jannunzi", firstName: "Jose",   lastName: "Annunzi" }
     // ];
 
-    var facebookConfig = {
-        clientID     : process.env.clientID,
-        clientSecret : process.env.clientSecret,
-        callbackURL  : process.env.callbackURL ,
-        profileFields: ['id','emails', 'first_name', 'last_name', 'displayName']
-    };
+    // var facebookConfig = {
+    //     clientID     : process.env.clientID,
+    //     clientSecret : process.env.clientSecret,
+    //     callbackURL  : process.env.callbackURL ,
+    //     profileFields: ['id','emails', 'first_name', 'last_name', 'displayName']
+    // };
 
-    passport.use('facebook', new FacebookStrategy(facebookConfig, facebookLogin));
-    passportAssignment.use('assignment-local', new LocalAssignment(localStrategy1));
+    // passport.use('facebook', new FacebookStrategy(facebookConfig, facebookLogin));
+    passportAssignment.use('assignment-local', new LocalAssignment(localStrategy));
     passportAssignment.serializeUser(serializeUser);
     passportAssignment.deserializeUser(deserializeUser);
 
