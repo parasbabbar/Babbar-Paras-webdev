@@ -35,9 +35,9 @@ app.post("/api/project/user", createUser);
         }));
 
     var googleConfig = {
-        clientID     : "149708704386-j5i0q23qol2tgjop73h9hflnot8ab5hj.apps.googleusercontent.com",
-        clientSecret : "nMQt__11AjvzJTEqzWv-x-iu",
-        callbackURL  : "/auth/project/google/callback"
+        clientID     : process.env.CLIENTID,
+        clientSecret : process.env.CLIENTSECRET,
+        callbackURL  : process.env.CALLBACKURL
     }
 
     passportproject.use('google', new GoogleStrategy(googleConfig, googleStrategy));
