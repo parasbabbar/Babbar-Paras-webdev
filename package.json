@@ -18,6 +18,7 @@
     "textangular": "^1.5.16",
     "passport-google-oauth20": "^1.0.0"
   },
+
   "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",

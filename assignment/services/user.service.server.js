@@ -1,42 +1,42 @@
 var app = require('../../express');
 var userModel = require('../model/user/user.model.server');
-var passportAssignment = require('passport');
+var passport = require('passport');
 var session = require('express-session');
 var cookieParser = require('cookie-parser');
-var LocalAssignment = require('passport-local').Strategy;
+var LocalStrategy = require('passport-local').Strategy;
 var bcrypt = require("bcrypt-nodejs");
 var FacebookStrategy = require('passport-facebook').Strategy;
 
 // var users = [
-    //     {_id: "123", username: "alice",    password: "alice",    firstName: "Alice",  lastName: "Wonder"  },
-    //     {_id: "234", username: "bob",      password: "bob",      firstName: "Bob",    lastName: "Marley"  },
-    //     {_id: "345", username: "charly",   password: "charly",   firstName: "Charly", lastName: "Garcia"  },
-    //     {_id: "456", username: "jannunzi", password: "jannunzi", firstName: "Jose",   lastName: "Annunzi" }
-    // ];
+//     {_id: "123", username: "alice",    password: "alice",    firstName: "Alice",  lastName: "Wonder"  },
+//     {_id: "234", username: "bob",      password: "bob",      firstName: "Bob",    lastName: "Marley"  },
+//     {_id: "345", username: "charly",   password: "charly",   firstName: "Charly", lastName: "Garcia"  },
+//     {_id: "456", username: "jannunzi", password: "jannunzi", firstName: "Jose",   lastName: "Annunzi" }
+// ];
 
-    // var facebookConfig = {
-    //     clientID     : process.env.clientID,
-    //     clientSecret : process.env.clientSecret,
-    //     callbackURL  : process.env.callbackURL ,
-    //     profileFields: ['id','emails', 'first_name', 'last_name', 'displayName']
-    // };
+var facebookConfig = {
+    clientID     : process.env.clientID,
+    clientSecret : process.env.clientSecret,
+    callbackURL  : process.env.callbackURL ,
+    profileFields: ['id','emails', 'first_name', 'last_name', 'displayName']
+};
 
-    // passport.use('facebook', new FacebookStrategy(facebookConfig, facebookLogin));
-    passportAssignment.use('assignment-local', new LocalAssignment(localStrategy));
-    passportAssignment.serializeUser(serializeUser);
-    passportAssignment.deserializeUser(deserializeUser);
+passport.use('facebook', new FacebookStrategy(facebookConfig, facebookLogin));
+passport.use('local', new LocalStrategy(localStrategy));
+passport.serializeUser(serializeUser);
+passport.deserializeUser(deserializeUser);
 
-    app.post('/api/user', createUser);
-    app.get('/api/user', findUser);
-    app.get('/api/user/:userId', findUserById);
-    app.put('/api/user/:userId', updateUser);
-    app.delete('/api/user/:userId', deleteUser);
-    app.post('/api/login',passportAssignment.authenticate('assignment-local'), login);
-    app.get('/api/loggedin',loggedIn);
-    app.post('/api/logout',logout);
-    app.post('/api/register',register);
-    app.get ('/auth/facebook', passportAssignment.authenticate('facebook', { scope : 'email' }));
-    app.get('/auth/facebook/callback', passportAssignment.authenticate('facebook',
+app.post('/api/user', createUser);
+app.get('/api/user', findUser);
+app.get('/api/user/:userId', findUserById);
+app.put('/api/user/:userId', updateUser);
+app.delete('/api/user/:userId', deleteUser);
+app.post('/api/login',passport.authenticate('local'), login);
+app.get('/api/loggedin',loggedIn);
+app.post('/api/logout',logout);
+app.post('/api/register',register);
+app.get ('/auth/facebook', passport.authenticate('facebook', { scope : 'email' }));
+app.get('/auth/facebook/callback', passport.authenticate('facebook',
     {successRedirect: '/assignment/Assignment-4/#!/profile', failureRedirect: '/assignment/Assignment-4/#!/login'}));
 
 
@@ -134,12 +134,12 @@ function facebookLogin(token, refreshToken, profile, done) {
 }
 
 function login(req, res) {
-        var user= req.user;
-        console.log(user);
-        res.json(user);
+    var user= req.user;
+    console.log(user);
+    res.json(user);
 }
 
-    function register(req, res) {
+function register(req, res) {
     var nUser = req.body;
     nUser.password = bcrypt.hashSync(nUser.password);
     userModel
@@ -155,12 +155,12 @@ function login(req, res) {
         });
 }
 
-    function logout(req, res){
+function logout(req, res){
     req.logout();
     res.send(200);
 }
 
-    function loggedIn(req,res){
+function loggedIn(req,res){
     if(req.isAuthenticated()){
         console.log(req.user);
         res.json(req.user);
@@ -169,13 +169,13 @@ function login(req, res) {
         res.send('0');
     }
 }
-    function serializeUser(user, done) {
+function serializeUser(user, done) {
     // console.log("in serialize "+user);
 
     done(null, user);
 }
 
-    function deserializeUser(user, done) {
+function deserializeUser(user, done) {
     userModel
         .findUserById(user._id)
         .then(
@@ -188,128 +188,130 @@ function login(req, res) {
         );
 }
 
-    function deleteUser(req, res) {
-        var uid = req.params.userId;
-        userModel
-            .deleteUser(uid)
-            .then(
-                function(status) {
-                    res.sendStatus(200)
-                },
-                function(error){
-                    res.sendStatus(400).send(error);
-                });
+function deleteUser(req, res) {
+    var uid = req.params.userId;
+    userModel
+        .deleteUser(uid)
+        .then(
+            function(status) {
+                res.sendStatus(200)
+            },
+            function(error){
+                res.sendStatus(400).send(error);
+            });
 
-        // for(var u in users) {
-        //     if(users[u]._id == uid) {
-        //         users.splice(u, 1);
-        //     }
-        // }
-        // res.send(200);
+    // for(var u in users) {
+    //     if(users[u]._id == uid) {
+    //         users.splice(u, 1);
+    //     }
+    // }
+    // res.send(200);
+}
+
+function updateUser(req, res) {
+    var user = req.body;
+    var userId = req.params.userId;
+    userModel
+        .updateUser(userId, user)
+        .then(
+            function (status) {
+                res.sendStatus(200);
+            },
+            function (error) {
+                res.sendStatus(400).send(error);
+            });
+
+    // for(var u in users) {
+    //     if(users[u]._id == uid) {
+    //         users[u] = user;
+    //         res.sendStatus(200);
+    //         return;
+    //     }
+    // }
+    // res.send(400);
+}
+
+function createUser(req, res) {
+    var user = req.body;
+    userModel
+        .createUser(user)
+        .then(function(nUser) {
+                res.json(nUser)
+            },
+            function(error){
+                res.sendStatus(404);
+            });
+    // users.push(user);
+    // res.send(user);
+}
+
+function findUser(req, res) {
+    var params = req.params;
+    var query = req.query;
+    if(query.password && query.username) {
+        findUserByCredentials(req, res);
+    } else if(query.username) {
+        findUserByUsername(req, res);
     }
+}
 
-    function updateUser(req, res) {
-        var user = req.body;
-        var userId = req.params.userId;
-        userModel
-            .updateUser(userId, user)
-            .then(
-                function (status) {
-                    res.sendStatus(200);
-                },
-                function (error) {
-                    res.sendStatus(400).send(error);
-                });
+function findUserByCredentials(req, res) {
+    var username = req.query.username;
+    var password = req.query.password;
+    // console.log(username);
+    // console.log(password);
+    userModel
+        .findUserByCredentials(username, password)
+        .then(
+            function(users) {
+                if (users.length > 0) {
+                    res.json(users[0]);
+                }
+                else {
+                    res.send('0');
+                }
 
-        // for(var u in users) {
-        //     if(users[u]._id == uid) {
-        //         users[u] = user;
-        //         res.sendStatus(200);
-        //         return;
-        //     }
-        // }
-        // res.send(400);
-    }
+            },
+            function(err){
+                res.sendStatus(404);
+            });
 
-    function createUser(req, res) {
-        var user = req.body;
-        userModel
-            .createUser(user)
-            .then(function(nUser) {
-                    res.json(nUser)
-                },
-                function(error){
-                    res.sendStatus(404);
-                });
-        // users.push(user);
-        // res.send(user);
-    }
+}
 
-    function findUser(req, res) {
-        var params = req.params;
-        var query = req.query;
-       if(query.password && query.username) {
-           findUserByCredentials(req, res);
-        } else if(query.username) {
-            findUserByUsername(req, res);
-        }
-    }
+function findUserByUsername(req, res) {
+    var username = req.query.username;
+    userModel
+        .findUserByUsername(username)
+        .then(
+            function(users) {
+                if (users) {
+                    res.send("0");
 
-    function findUserByCredentials(req, res) {
-        var username = req.query.username;
-        var password = req.query.password;
-        // console.log(username);
-        // console.log(password);
-        userModel
-            .findUserByCredentials(username, password)
-            .then(
-                function(users) {
-                    if (users.length > 0) {
-                        res.json(users[0]);
-                    }
-                    else {
-                        res.send('0');
-                    }
+                }
+                else{
+                    res.send(username);
+                }
+            });
+}
 
-                },
-                function(err){
-                    res.sendStatus(404);
-                });
-
-    }
-
-    function findUserByUsername(req, res) {
-        var username = req.query.username;
-        userModel
-            .findUserByUsername(username)
-            .then(
-                function(users) {
-                    if (users) {
-                        res.send("0");
-
-                    }
-                    else{
-                        res.send(username);
-                    }
-                });
-    }
-
-    function findUserById(req, res) {
-        var userId = req.params.userId;
-        userModel
-            .findUserById(userId)
-            .then(
-                function(user) {
-                    res.send(user);
-                },
-                function(err){
-                    res.sendStatus(400).send(error);
-                });
-        // for(var u in users) {
-        //     if(users[u]._id === userId) {
-        //         res.send(users[u]);
-        //         return;
-        //     }
-        // }
-        // res.send('0');
-    }
+function findUserById(req, res) {
+    var userId = req.params.userId;
+    userModel
+        .findUserById(userId)
+        .then(
+            function (user) {
+                res.send(user);
+            },
+            function (err) {
+                res.sendStatus(400).send(error);
+            });
+    // for(var u in users) {
+    //     if(users[u]._id === userId) {
+    //         res.send(users[u]);
+    //         return;
+    //     }
+    // }
+    // res.send('0');
+//
+//}
+}
