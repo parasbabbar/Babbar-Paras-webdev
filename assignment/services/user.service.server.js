@@ -1,8 +1,8 @@
 var app = require('../../express');
 var userModel = require('../model/user/user.model.server');
 var passportAssignment = require('passport');
-// var session = require('express-session');
-// var cookieParser = require('cookie-parser');
+var session = require('express-session');
+var cookieParser = require('cookie-parser');
 var LocalAssignment = require('passport-local').Strategy;
 var bcrypt = require("bcrypt-nodejs");
 var FacebookStrategy = require('passport-facebook').Strategy;
@@ -14,14 +14,14 @@ var FacebookStrategy = require('passport-facebook').Strategy;
     //     {_id: "456", username: "jannunzi", password: "jannunzi", firstName: "Jose",   lastName: "Annunzi" }
     // ];
 
-    // var facebookConfig = {
-    //     clientID     : process.env.clientID,
-    //     clientSecret : process.env.clientSecret,
-    //     callbackURL  : process.env.callbackURL ,
-    //     profileFields: ['id','emails', 'first_name', 'last_name', 'displayName']
-    // };
+    var facebookConfig = {
+        clientID     : process.env.clientID,
+        clientSecret : process.env.clientSecret,
+        callbackURL  : process.env.callbackURL ,
+        profileFields: ['id','emails', 'first_name', 'last_name', 'displayName']
+    };
 
-    // passport.use('facebook', new FacebookStrategy(facebookConfig, facebookLogin));
+    passport.use('facebook', new FacebookStrategy(facebookConfig, facebookLogin));
     passportAssignment.use('assignment-local', new LocalAssignment(localStrategy1));
     passportAssignment.serializeUser(serializeUser);
     passportAssignment.deserializeUser(deserializeUser);
@@ -41,7 +41,7 @@ var FacebookStrategy = require('passport-facebook').Strategy;
 
 
 
-function localStrategy1(username, password, done) {
+function localStrategy(username, password, done) {
     console.log(username);
     userModel
         .findUserByUsername(username)

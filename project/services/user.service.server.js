@@ -34,13 +34,13 @@ app.post("/api/project/user", createUser);
             failureRedirect: '/project/#!/login'
         }));
 
-    // var googleConfig = {
-    //     clientID     : process.env.CLIENTID,
-    //     clientSecret : process.env.CLIENTSECRET,
-    //     callbackURL  : process.env.CALLBACKURL
-    // }
+    var googleConfig = {
+        clientID     : process.env.CLIENTID,
+        clientSecret : process.env.CLIENTSECRET,
+        callbackURL  : process.env.CALLBACKURL
+    }
 
-    // passportproject.use('google', new GoogleStrategy(googleConfig, googleStrategy));
+    passportproject.use('google', new GoogleStrategy(googleConfig, googleStrategy));
 
 
 function googleStrategy(token, refereshToken, profile, done) {
