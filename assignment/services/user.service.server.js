@@ -1,9 +1,9 @@
 var app = require('../../express');
 var userModel = require('../model/user/user.model.server');
-var passport = require('passport');
-var session = require('express-session');
-var cookieParser = require('cookie-parser');
-var LocalStrategy = require('passport-local').Strategy;
+var passportAssignment = require('passport');
+// var session = require('express-session');
+// var cookieParser = require('cookie-parser');
+var LocalAssignment = require('passport-local').Strategy;
 var bcrypt = require("bcrypt-nodejs");
 var FacebookStrategy = require('passport-facebook').Strategy;
 
@@ -22,26 +22,26 @@ var FacebookStrategy = require('passport-facebook').Strategy;
     };
 
     passport.use('facebook', new FacebookStrategy(facebookConfig, facebookLogin));
-    passport.use('local', new LocalStrategy(localStrategy));
-    passport.serializeUser(serializeUser);
-    passport.deserializeUser(deserializeUser);
+    passportAssignment.use('assignment-local', new LocalAssignment(localStrategy1));
+    passportAssignment.serializeUser(serializeUser);
+    passportAssignment.deserializeUser(deserializeUser);
 
     app.post('/api/user', createUser);
     app.get('/api/user', findUser);
     app.get('/api/user/:userId', findUserById);
     app.put('/api/user/:userId', updateUser);
     app.delete('/api/user/:userId', deleteUser);
-    app.post('/api/login',passport.authenticate('local'), login);
+    app.post('/api/login',passportAssignment.authenticate('assignment-local'), login);
     app.get('/api/loggedin',loggedIn);
     app.post('/api/logout',logout);
     app.post('/api/register',register);
-    app.get ('/auth/facebook', passport.authenticate('facebook', { scope : 'email' }));
-    app.get('/auth/facebook/callback', passport.authenticate('facebook',
+    app.get ('/auth/facebook', passportAssignment.authenticate('facebook', { scope : 'email' }));
+    app.get('/auth/facebook/callback', passportAssignment.authenticate('facebook',
     {successRedirect: '/assignment/Assignment-4/#!/profile', failureRedirect: '/assignment/Assignment-4/#!/login'}));
 
 
 
-function localStrategy(username, password, done) {
+function localStrategy1(username, password, done) {
     console.log(username);
     userModel
         .findUserByUsername(username)
