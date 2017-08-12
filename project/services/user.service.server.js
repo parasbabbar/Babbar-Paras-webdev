@@ -38,7 +38,7 @@ app.post("/api/project/user", createUser);
         clientID     : process.env.CLIENTID,
         clientSecret : process.env.CLIENTSECRET,
         callbackURL  : process.env.CALLBACKURL
-    }
+    };
 
     passportproject.use('google', new GoogleStrategy(googleConfig, googleStrategy));
 
