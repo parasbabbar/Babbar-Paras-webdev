@@ -47,7 +47,7 @@ h6 {
 }
 
 .grey-background{
-    background-color: lightgreen;
+    background-color: whitesmoke;
 }
 
 .push-left{
@@ -278,7 +278,7 @@ hgroup h2.lead { font: normal normal 1.125em "Roboto",Arial,Verdana,sans-serif; 
 .banner {
     padding: 100px 0;
     color: #f8f8f8;
-    background: url(../img/banner-bg.jpg) no-repeat center center;
+    /*background: url() no-repeat center center;*/
     background-size: cover;
 }
 
